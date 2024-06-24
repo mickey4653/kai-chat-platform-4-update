@@ -5,12 +5,12 @@ import { connectAuthEmulator, getAuth } from 'firebase/auth';
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
 import { connectFunctionsEmulator, getFunctions } from 'firebase/functions';
 
+import firebaseConfig from '../firebase/config';
+
 import authReducer from './slices/authSlice';
 import chatReducer from './slices/chatSlice';
 import toolsReducer from './slices/toolsSlice';
 import userReducer from './slices/userSlice';
-
-import firebaseConfig from '@/firebase/config';
 
 const app = initializeApp(firebaseConfig);
 
