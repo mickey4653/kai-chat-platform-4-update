@@ -25,6 +25,16 @@ const styles = {
     }),
   },
 
+  iconButtonProps: {
+    sx: {
+      padding: '8px',
+    },
+  },
+  buttonTextProps: {
+    sx: {
+      padding: '8px',
+    },
+  },
   menuListProps: {
     sx: {
       display: 'flex',
@@ -58,21 +68,6 @@ const styles = {
         color: theme.palette.Common.White['100p'],
       },
       padding: '10px 20px',
-    }),
-  },
-
-  closeIconProps: {
-    sx: (theme) => ({
-      position: 'absolute',
-      top: '5px',
-      right: '-15px',
-      padding: '5px',
-      color: theme.palette.Common.White['100p'],
-      backgroundColor: theme.palette.Background.purple3,
-      borderRadius: '50%',
-      ':hover': {
-        backgroundColor: '#B791FF',
-      },
     }),
   },
 };
