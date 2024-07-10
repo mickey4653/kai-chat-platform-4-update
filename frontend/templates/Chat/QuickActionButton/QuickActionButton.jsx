@@ -44,14 +44,14 @@ const QuickActionButton = (props) => {
     setOpen(false);
   };
 
-  const handleActionClick = ( text, color) => {
+  const handleActionClick = (text, color) => {
     dispatch(setInput(onAction));
     setButtonText(text);
     setButtonColor(color);
     handleClose();
   };
 
-  const isDisabled = loading; 
+  const isDisabled = loading;
 
   return (
     <Grid {...styles.actionButtonGridProps}>
@@ -63,7 +63,10 @@ const QuickActionButton = (props) => {
           ref={anchorRef}
         >
           {loading ? (
-            <CircularProgress size={24} sx={{ color: '#FFFFFF' || 'inherit' }}/>
+            <CircularProgress
+              size={24}
+              sx={{ color: '#FFFFFF' || 'inherit' }}
+            />
           ) : (
             <ActionIcon {...styles.iconButtonProps} />
           )}
@@ -83,7 +86,7 @@ const QuickActionButton = (props) => {
         <Paper elevation={3} {...styles.paperProps}>
           <ClickAwayListener onClickAway={handleClose}>
             <MenuList {...styles.menuListProps}>
-            <MenuItem
+              <MenuItem
                 onClick={() => handleActionClick('Actions', null)}
                 disabled={isDisabled}
                 {...styles.menuItemProps(isDisabled)}
@@ -91,7 +94,9 @@ const QuickActionButton = (props) => {
                 Default Actions
               </MenuItem>
               <MenuItem
-                onClick={() => handleActionClick('Suggest Techniques', '#1AD6A1')}
+                onClick={() =>
+                  handleActionClick('Suggest Techniques', '#1AD6A1')
+                }
                 disabled={isDisabled}
                 {...styles.menuItemProps(isDisabled)}
               >
@@ -111,7 +116,6 @@ const QuickActionButton = (props) => {
               >
                 Summarize
               </MenuItem>
-             
             </MenuList>
           </ClickAwayListener>
         </Paper>
