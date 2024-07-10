@@ -21,11 +21,13 @@ import styles from './styles';
 import { setInput } from '@/redux/slices/chatSlice';
 
 const QuickActionButton = (props) => {
-  const { onAction, text } = props;
+  const { onAction, defaultText } = props;
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [buttonText, setButtonText] = useState(defaultText);
+  const [buttonColor, setButtonColor] = useState(null);
   const anchorRef = useRef(null);
 
   const handleQuickAction = useCallback(() => {
@@ -42,27 +44,31 @@ const QuickActionButton = (props) => {
     setOpen(false);
   };
 
-  const handleActionClick = () => {
+  const handleActionClick = ( text, color) => {
     dispatch(setInput(onAction));
+    setButtonText(text);
+    setButtonColor(color);
     handleClose();
   };
+
+  const isDisabled = loading; 
 
   return (
     <Grid {...styles.actionButtonGridProps}>
       <IconButton>
         <Button
           onClick={handleQuickAction}
-          {...styles.actionButtonProps}
+          {...styles.actionButtonProps(buttonColor)}
           disabled={loading}
           ref={anchorRef}
         >
           {loading ? (
-            <CircularProgress size={24} />
+            <CircularProgress size={24} sx={{ color: '#FFFFFF' || 'inherit' }}/>
           ) : (
             <ActionIcon {...styles.iconButtonProps} />
           )}
           <span style={{ paddingLeft: '5px' }}>
-            {loading ? 'Loading...' : text}
+            {loading ? 'Loading...' : buttonText}
           </span>
         </Button>
       </IconButton>
@@ -77,24 +83,35 @@ const QuickActionButton = (props) => {
         <Paper elevation={3} {...styles.paperProps}>
           <ClickAwayListener onClickAway={handleClose}>
             <MenuList {...styles.menuListProps}>
+            <MenuItem
+                onClick={() => handleActionClick('Actions', null)}
+                disabled={isDisabled}
+                {...styles.menuItemProps(isDisabled)}
+              >
+                Default Actions
+              </MenuItem>
               <MenuItem
-                onClick={() => handleActionClick('suggest_techniques')}
-                {...styles.menuItemProps}
+                onClick={() => handleActionClick('Suggest Techniques', '#1AD6A1')}
+                disabled={isDisabled}
+                {...styles.menuItemProps(isDisabled)}
               >
                 Suggest Techniques
               </MenuItem>
               <MenuItem
-                onClick={() => handleActionClick('recommend_books')}
-                {...styles.menuItemProps}
+                onClick={() => handleActionClick('Recommend Books', '#1AD6A1')}
+                disabled={isDisabled}
+                {...styles.menuItemProps(isDisabled)}
               >
                 Recommend Books
               </MenuItem>
               <MenuItem
-                onClick={() => handleActionClick('summarize')}
-                {...styles.menuItemProps}
+                onClick={() => handleActionClick('Summarize', '#1AD6A1')}
+                disabled={isDisabled}
+                {...styles.menuItemProps(isDisabled)}
               >
                 Summarize
               </MenuItem>
+             
             </MenuList>
           </ClickAwayListener>
         </Paper>

@@ -335,7 +335,7 @@ const ChatInterface = () => {
     return (
       <InputAdornment position="start">
         <Grid {...styles.bottomChatContent.bottomChatContentGridProps}>
-          <QuickActionButton text="Actions" />
+          <QuickActionButton buttonText="Actions" />
         </Grid>
       </InputAdornment>
     );

@@ -6,24 +6,24 @@ const styles = {
     alignItems: 'center',
   },
 
-  actionButtonProps: {
+  actionButtonProps:(color) => ({
     variant: 'outlined',
     sx: (theme) => ({
       borderRadius: '18px',
       height: 'auto',
-      borderColor: theme.palette.Background.purple3,
-      background: theme.palette.Background.purple3,
+      borderColor: color || theme.palette.Background.purple3,
+      background: color ||theme.palette.Background.purple3,
       color: theme.palette.Common.White['100p'],
       textTransform: 'none',
       ':hover': {
-        backgroundColor: '#B791FF',
-        borderColor: theme.palette.Background.purple,
+        backgroundColor: color ? `${color}BB` : '#B791FF',
+        borderColor: color || theme.palette.Background.purple,
         color: theme.palette.Common.White['100p'],
       },
       ml: { laptop: -3, desktop: -2, desktopMedium: -4.5 },
       mr: { laptop: -2, desktop: -1, desktopMedium: -3 },
     }),
-  },
+  }),
 
   iconButtonProps: {
     sx: {
@@ -54,7 +54,7 @@ const styles = {
       boxShadow: 'none',
     },
   },
-  menuItemProps: {
+  menuItemProps: (disabled) => ({
     sx: (theme) => ({
       borderRadius: '18px',
       margin: '0 5px',
@@ -63,13 +63,15 @@ const styles = {
       color: theme.palette.Common.White['100p'],
       textTransform: 'none',
       ':hover': {
-        backgroundColor: '#B791FF',
-        borderColor: theme.palette.Background.purple,
-        color: theme.palette.Common.White['100p'],
+        backgroundColor: disabled ? 'none' : '#B791FF',
+        borderColor: disabled ? theme.palette.Background.purple3 : theme.palette.Background.purple,
+        color: disabled ? theme.palette.Common.White['60p'] : theme.palette.Common.White['100p'],
       },
       padding: '10px 20px',
+      opacity: disabled ? 0.5 : 1,
+      cursor: disabled ? 'not-allowed' : 'pointer',
     }),
-  },
+  }),
 };
 
 export default styles;
