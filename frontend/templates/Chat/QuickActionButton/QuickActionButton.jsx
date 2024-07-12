@@ -82,7 +82,6 @@ const QuickActionButton = (props) => {
         placement="top"
         disablePortal
         {...styles.popperProps}
-        
       >
         <Paper elevation={3} {...styles.paperProps}>
           <ClickAwayListener onClickAway={handleClose}>

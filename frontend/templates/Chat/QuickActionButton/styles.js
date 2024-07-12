@@ -41,28 +41,22 @@ const styles = {
       flexDirection: 'row',
       padding: 1,
       margin: '15px',
-     
     },
   },
   popperProps: {
-    
-    sx: (theme)=>({
-      
-    }),
+    sx: (theme) => ({}),
   },
   paperProps: {
     sx: {
       backgroundColor: 'transparent !important',
       boxShadow: 'none',
-     
     },
   },
   menuItemProps: (disabled) => ({
-    
     sx: (theme) => ({
       borderRadius: '18px',
       margin: '0 5px',
-      
+
       borderColor: theme.palette.Background.purple3,
       background: theme.palette.Background.purple3,
       color: theme.palette.Common.White['100p'],
@@ -79,14 +73,10 @@ const styles = {
       padding: '5px 20px',
       opacity: disabled ? 0.5 : 1,
       cursor: disabled ? 'not-allowed' : 'pointer',
-    
+
       fontSize: { laptop: '13px', desktop: '12px', desktopMedium: '14px' },
       pl: { laptop: 1, desktop: 1, desktopMedium: 1 },
       pr: { laptop: 1, desktop: 1, desktopMedium: 1 },
-     
-     
-      
-     
     }),
   }),
 };
