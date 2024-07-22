@@ -24,20 +24,14 @@ const QuickActionButton = (props) => {
   const { onAction, defaultText } = props;
 
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [buttonText, setButtonText] = useState(defaultText);
   const [buttonColor, setButtonColor] = useState(null);
   const anchorRef = useRef(null);
 
   const handleQuickAction = useCallback(() => {
-    setLoading(true);
-
     // Add any other logic you want to perform when the button is clicked
-    setTimeout(() => {
-      setLoading(false);
       setOpen((preOpen) => !preOpen);
-    }, 500);
   }, [dispatch, onAction]);
 
   const handleClose = () => {
@@ -51,7 +45,6 @@ const QuickActionButton = (props) => {
     handleClose();
   };
 
-  const isDisabled = loading;
 
   return (
     <Grid {...styles.actionButtonGridProps}>
@@ -59,19 +52,11 @@ const QuickActionButton = (props) => {
         <Button
           onClick={handleQuickAction}
           {...styles.actionButtonProps(buttonColor)}
-          disabled={loading}
           ref={anchorRef}
         >
-          {loading ? (
-            <CircularProgress
-              size={24}
-              sx={{ color: '#FFFFFF' || 'inherit' }}
-            />
-          ) : (
             <ActionIcon {...styles.iconButtonProps} />
-          )}
           <span style={{ paddingLeft: '5px' }}>
-            {loading ? 'Loading...' : buttonText}
+            {buttonText}
           </span>
         </Button>
       </IconButton>
@@ -88,8 +73,7 @@ const QuickActionButton = (props) => {
             <MenuList {...styles.menuListProps}>
               <MenuItem
                 onClick={() => handleActionClick('Actions', null)}
-                disabled={isDisabled}
-                {...styles.menuItemProps(isDisabled)}
+                {...styles.menuItemProps(false)}
               >
                 Default Actions
               </MenuItem>
@@ -97,22 +81,19 @@ const QuickActionButton = (props) => {
                 onClick={() =>
                   handleActionClick('Suggest Techniques', '#1AD6A1')
                 }
-                disabled={isDisabled}
-                {...styles.menuItemProps(isDisabled)}
+                {...styles.menuItemProps(false)}
               >
                 Suggest Techniques
               </MenuItem>
               <MenuItem
                 onClick={() => handleActionClick('Recommend Books', '#1AD6A1')}
-                disabled={isDisabled}
-                {...styles.menuItemProps(isDisabled)}
+                {...styles.menuItemProps(false)}
               >
                 Recommend Books
               </MenuItem>
               <MenuItem
                 onClick={() => handleActionClick('Summarize', '#1AD6A1')}
-                disabled={isDisabled}
-                {...styles.menuItemProps(isDisabled)}
+                {...styles.menuItemProps(false)}
               >
                 Summarize
               </MenuItem>

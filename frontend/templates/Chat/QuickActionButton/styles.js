@@ -52,7 +52,7 @@ const styles = {
       boxShadow: 'none',
     },
   },
-  menuItemProps: (disabled) => ({
+  menuItemProps: (isDisabled) => ({
     sx: (theme) => ({
       borderRadius: '18px',
       margin: '0 5px',
@@ -62,17 +62,17 @@ const styles = {
       color: theme.palette.Common.White['100p'],
       textTransform: 'none',
       ':hover': {
-        backgroundColor: disabled ? 'none' : '#B791FF',
-        borderColor: disabled
+        backgroundColor: isDisabled ? 'none' : '#B791FF',
+        borderColor: isDisabled
           ? theme.palette.Background.purple3
           : theme.palette.Background.purple,
-        color: disabled
+        color: isDisabled
           ? theme.palette.Common.White['60p']
           : theme.palette.Common.White['100p'],
       },
       padding: '5px 20px',
-      opacity: disabled ? 0.5 : 1,
-      cursor: disabled ? 'not-allowed' : 'pointer',
+      opacity: isDisabled ? 0.5 : 1,
+      PointerEvent: isDisabled ? 'none' : 'auto',
 
       fontSize: { laptop: '13px', desktop: '12px', desktopMedium: '14px' },
       pl: { laptop: 1, desktop: 1, desktopMedium: 1 },
