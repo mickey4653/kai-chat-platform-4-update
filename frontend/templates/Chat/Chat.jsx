@@ -24,9 +24,9 @@ import { MESSAGE_ROLE, MESSAGE_TYPES } from '@/constants/bots';
 
 import CenterChatContentNoMessages from './CenterChatContentNoMessages';
 import ChatSpinner from './ChatSpinner';
+import DiscoveryLibraryUI from './DiscoveryLibrary/DiscoveryLibraryUI';
 import Message from './Message';
 import QuickActionButton from './QuickActionButton';
-import DiscoveryLibraryUI from './DiscoveryLibrary/DiscoveryLibraryUI';
 import styles from './styles';
 
 import {
@@ -158,13 +158,21 @@ const ChatInterface = () => {
   const categorizePrompts = () => {
     // Logic to categorize and fetch custom prompts
     return [
-        { title: 'Math Tutor', description: 'From now on, I want you to act as a math tutor. I will be asking you questions related to various mathematical concepts, including algebra, geometry, calculus, and statistics. Please provide detailed explanations, step-by-step solutions, and relevant examples for each topic we discuss.' },
-        { title: 'Biology Tutor', description: 'Please act as my biology tutor. I will ask you about topics such as cell biology, genetics, evolution, ecology, and human anatomy. Provide comprehensive explanations, diagrams, and examples to help me understand these biological concepts.' },
-        // { title: 'Programming Tutor', description: 'I want you to be my programming tutor. I will ask you about various programming languages, coding concepts, algorithms, and debugging techniques. Provide clear explanations, code examples, and step-by-step guidance for writing and understanding code.' },
-        
-        // Other categorized prompts
+      {
+        title: 'Math Tutor',
+        description:
+          'From now on, I want you to act as a math tutor. I will be asking you questions related to various mathematical concepts, including algebra, geometry, calculus, and statistics. Please provide detailed explanations, step-by-step solutions, and relevant examples for each topic we discuss.',
+      },
+      {
+        title: 'Biology Tutor',
+        description:
+          'Please act as my biology tutor. I will ask you about topics such as cell biology, genetics, evolution, ecology, and human anatomy. Provide comprehensive explanations, diagrams, and examples to help me understand these biological concepts.',
+      },
+      // { title: 'Programming Tutor', description: 'I want you to be my programming tutor. I will ask you about various programming languages, coding concepts, algorithms, and debugging techniques. Provide clear explanations, code examples, and step-by-step guidance for writing and understanding code.' },
+
+      // Other categorized prompts
     ];
-};
+  };
 
   useEffect(() => {
     const fetchPrompts = async () => {
@@ -173,7 +181,6 @@ const ChatInterface = () => {
     };
     fetchPrompts();
   }, []);
-
 
   const handleOnScroll = () => {
     const scrolled =
@@ -363,11 +370,11 @@ const ChatInterface = () => {
     );
   };
 
-// const renderDiscoveryButton = () => {
-//   return(
+  // const renderDiscoveryButton = () => {
+  //   return(
 
-//   );
-// }
+  //   );
+  // }
 
   const renderBottomChatContent = () => {
     if (!openSettingsChat && !infoChatOpened)

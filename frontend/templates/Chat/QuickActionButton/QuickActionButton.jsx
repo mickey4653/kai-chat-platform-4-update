@@ -31,7 +31,7 @@ const QuickActionButton = (props) => {
 
   const handleQuickAction = useCallback(() => {
     // Add any other logic you want to perform when the button is clicked
-      setOpen((preOpen) => !preOpen);
+    setOpen((preOpen) => !preOpen);
   }, [dispatch, onAction]);
 
   const handleClose = () => {
@@ -45,7 +45,6 @@ const QuickActionButton = (props) => {
     handleClose();
   };
 
-
   return (
     <Grid {...styles.actionButtonGridProps}>
       <IconButton>
@@ -54,10 +53,8 @@ const QuickActionButton = (props) => {
           {...styles.actionButtonProps(buttonColor)}
           ref={anchorRef}
         >
-            <ActionIcon {...styles.iconButtonProps} />
-          <span style={{ paddingLeft: '5px' }}>
-            {buttonText}
-          </span>
+          <ActionIcon {...styles.iconButtonProps} />
+          <span style={{ paddingLeft: '5px' }}>{buttonText}</span>
         </Button>
       </IconButton>
 
