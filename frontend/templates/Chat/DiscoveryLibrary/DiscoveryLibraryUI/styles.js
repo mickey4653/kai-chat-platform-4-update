@@ -164,11 +164,8 @@ const styles = {
     },
   },
 
-  cardProps: (ImageUrl) => ({
+  cardProps: {
     sx: {
-      backgroundImage: `url(${ImageUrl})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
       borderRadius: '8px',
       boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
       cursor: 'pointer',
@@ -178,9 +175,8 @@ const styles = {
       },
       width: { laptop: '142px', desktop: '148px' },
       height: { laptop: '360px', desktop: '350px' },
-      // overflow: 'scroll',
     },
-  }),
+  },
   cardTitleProps: {
     sx: {
       fontSize: '16px',
@@ -192,6 +188,11 @@ const styles = {
       fontSize: '12px',
       color: theme.palette.Greyscale[400],
     }),
+  },
+
+  backImageProps: {
+    width: '100%', // Adjust width as needed
+    height: 'auto', // Adjust height as needed
   },
 };
 export default styles;

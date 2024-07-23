@@ -29,9 +29,12 @@ const imageUrls = [
   imageCover4,
   // Add more image URLs as needed
 ];
+console.log(imageCover1, imageCover2, imageCover3, imageCover4);
+// const placeholderImage = 'https://media.istockphoto.com/id/1862938026/photo/artificial-intelligence-digital-concept.jpg?s=1024x1024&w=is&k=20&c=tv7Lr4WIncKuiDVcrcykbTUpKij48EF4wwJ92gtu-h0=';
 
 const getRandomImage = () => {
-  return imageUrls[Math.floor(Math.random() * imageUrls.length)];
+  const RandomImage = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+  return <RandomImage {...styles.backImageProps} />;
 };
 
 const DiscoveryLibraryUI = (props) => {
@@ -108,9 +111,10 @@ const DiscoveryLibraryUI = (props) => {
       <Grid {...styles.cardGridProps}>
         {customPrompts?.map((prompt, index) => (
           <Grid item key={index} onClick={() => onSelect(prompt)}>
-            <Card {...styles.cardProps(getRandomImage())}>
+            <Card {...styles.cardProps}>
               <CardActionArea>
                 <CardContent>
+                  {getRandomImage()}
                   <Typography {...styles.cardTitleProps}>
                     {prompt.title}
                   </Typography>
