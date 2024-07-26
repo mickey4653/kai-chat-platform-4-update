@@ -161,7 +161,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     spacing: 1,
-    backgroundColor: '#B791FF',
+    // backgroundColor: '#B791FF',
     width: { desktop: '320px', mobile: '308px', mobileSmall: '130px' },
     height: { laptop: '280px', desktop: '290px' },
     overflow: 'scroll',
