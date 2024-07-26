@@ -6,10 +6,22 @@ import {
   CardContent,
   Grid,
   IconButton,
-  List,
-  ListItem,
   Typography,
 } from '@mui/material';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import useChat from '@/hooks/useChat'; // Import the hook
+
+import {
+  RenderBottomChatContent,
+  RenderCenterChatContent,
+  RenderCenterChatContentNoMessages,
+  RenderMoreChat,
+  RenderNewMessageIndicator,
+  RenderQuickAction,
+  RenderSendIcon,
+} from '@/hooks/useChatRenderComponents';
 
 import DiscoveryIcon from '@/assets/svg/add-block2.svg';
 import imageCover1 from '@/assets/svg/imageCover1.svg';
@@ -22,6 +34,7 @@ import UnionIcon from '@/assets/svg/Union.svg';
 
 import styles from './styles';
 
+// Import the components
 const imageUrls = [
   imageCover1,
   imageCover2,
@@ -29,7 +42,7 @@ const imageUrls = [
   imageCover4,
   // Add more image URLs as needed
 ];
-console.log(imageCover1, imageCover2, imageCover3, imageCover4);
+// console.log(imageCover1, imageCover2, imageCover3, imageCover4);
 // const placeholderImage = 'https://media.istockphoto.com/id/1862938026/photo/artificial-intelligence-digital-concept.jpg?s=1024x1024&w=is&k=20&c=tv7Lr4WIncKuiDVcrcykbTUpKij48EF4wwJ92gtu-h0=';
 
 const getRandomImage = () => {
@@ -37,9 +50,30 @@ const getRandomImage = () => {
   return <RandomImage {...styles.backImageProps} />;
 };
 
-const DiscoveryLibraryUI = (props) => {
-  const { onSelect } = props;
+const DiscoveryLibraryUI = () => {
   const [customPrompts, setCustomPrompts] = useState([]);
+  const {
+    messagesContainerRef,
+    dispatch,
+    input,
+    setInput,
+    setMore,
+    typing,
+    streaming,
+    chatMessages,
+    showNewMessageIndicator,
+    error,
+    openSettingsChat,
+    infoChatOpened,
+    handleOnScroll,
+    handleScrollToBottom,
+    handleSendMessage,
+    handleQuickReply,
+    keyDownHandler,
+    fullyScrolled,
+  } = useChat(); // Use the custom hook
+
+  const reduxDispatch = useDispatch(); // Use Redux dispatch
 
   useEffect(() => {
     // Define your custom prompts here
@@ -59,7 +93,11 @@ const DiscoveryLibraryUI = (props) => {
         description:
           'I want you to be my programming tutor. I will ask you about various programming languages, coding concepts, algorithms, and debugging techniques. Provide clear explanations, code examples, and step-by-step guidance for writing and understanding code.',
       },
-      // { title: 'Programming Tutor', description: 'I want you to be my programming tutor. I will ask you about various programming languages, coding concepts, algorithms, and debugging techniques. Provide clear explanations, code examples, and step-by-step guidance for writing and understanding code.' },
+      {
+        title: 'Music Tutor',
+        description:
+          'Act as a music tutor for our conversation. I will ask you about music theory, instruments, composition, and performance techniques. Provide detailed explanations, sheet music examples, and exercises to help me understand and improve my musical abilities.',
+      },
       // { title: 'Programming Tutor', description: 'I want you to be my programming tutor. I will ask you about various programming languages, coding concepts, algorithms, and debugging techniques. Provide clear explanations, code examples, and step-by-step guidance for writing and understanding code.' },
 
       // Add more prompts as needed
@@ -67,14 +105,31 @@ const DiscoveryLibraryUI = (props) => {
     const fetchPrompts = async () => {
       const prompts = categorizePrompts(); // This could be an API call or local data
       setCustomPrompts(prompts);
+      handleScrollToBottom();
     };
 
     fetchPrompts();
   }, []);
 
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop =
+        messagesContainerRef.current.scrollHeight;
+    }
+  }, [chatMessages]);
+
+  const handlePromptClick = (description) => {
+    // console.log('Prompt clicked:', description);
+    dispatch(setInput(description));
+    handleSendMessage(description);
+  };
+
+  useEffect(() => {
+    // console.log('Input state changed:', input);
+  }, [input]);
   return (
-    <Grid container {...styles.discoveryGridProps}>
-      <Grid container {...styles.discoveryProps}>
+    <Grid container {...styles.discoveryContainerGrid}>
+      <Grid container {...styles.discoveryGridProps}>
         <Grid container {...styles.discoveryPanelProps}>
           <IconButton>
             <DiscoveryIcon {...styles.discoveryIconProps} />
@@ -107,25 +162,65 @@ const DiscoveryLibraryUI = (props) => {
             </Typography>
           </Grid>
         </Grid>
+
+        <Grid {...styles.cardGridProps}>
+          {customPrompts?.map((prompt, index) => (
+            <Grid
+              item
+              key={index}
+              onClick={() => handlePromptClick(prompt.description)}
+            >
+              <Card {...styles.cardProps}>
+                <CardActionArea>
+                  <CardContent>
+                    {getRandomImage()}
+                    <Typography {...styles.cardTitleProps}>
+                      {prompt.title}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
-      <Grid {...styles.cardGridProps}>
-        {customPrompts?.map((prompt, index) => (
-          <Grid item key={index} onClick={() => onSelect(prompt)}>
-            <Card {...styles.cardProps}>
-              <CardActionArea>
-                <CardContent>
-                  {getRandomImage()}
-                  <Typography {...styles.cardTitleProps}>
-                    {prompt.title}
-                  </Typography>
-                  <Typography {...styles.cardDescriptionProps}>
-                    {prompt.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
+
+      <Grid {...styles.CenterChatContentGridProps}>
+        <RenderCenterChatContent
+          chatMessages={chatMessages}
+          handleOnScroll={handleOnScroll}
+          messagesContainerRef={messagesContainerRef}
+          dispatch={reduxDispatch}
+          setMore={setMore}
+          handleQuickReply={handleQuickReply}
+          streaming={streaming}
+          fullyScrolled={fullyScrolled}
+          typing={typing}
+          openSettingsChat={openSettingsChat}
+          infoChatOpened={infoChatOpened} // Add this line
+        />
+        {showNewMessageIndicator && (
+          <RenderNewMessageIndicator
+            handleScrollToBottom={handleScrollToBottom}
+          />
+        )}
+      </Grid>
+
+      {/* RenderCenterChatContentNoMessages */}
+
+      <Grid {...styles.chatBoxProps}>
+        <RenderBottomChatContent
+          openSettingsChat={openSettingsChat}
+          infoChatOpened={infoChatOpened}
+          input={input}
+          error={error}
+          dispatch={dispatch}
+          keyDownHandler={keyDownHandler}
+          handleSendMessage={handleSendMessage}
+          typing={typing} // Pass typing here
+          streaming={streaming} // Pass streaming here
+          setInput={setInput} // Pass setInput here
+        />
       </Grid>
     </Grid>
   );

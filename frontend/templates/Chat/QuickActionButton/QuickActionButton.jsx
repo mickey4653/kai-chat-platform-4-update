@@ -47,12 +47,8 @@ const QuickActionButton = (props) => {
 
   return (
     <Grid {...styles.actionButtonGridProps}>
-      <IconButton>
-        <Button
-          onClick={handleQuickAction}
-          {...styles.actionButtonProps(buttonColor)}
-          ref={anchorRef}
-        >
+      <IconButton onClick={handleQuickAction}>
+        <Button {...styles.actionButtonProps(buttonColor)} ref={anchorRef}>
           <ActionIcon {...styles.iconButtonProps} />
           <span style={{ paddingLeft: '5px' }}>{buttonText}</span>
         </Button>

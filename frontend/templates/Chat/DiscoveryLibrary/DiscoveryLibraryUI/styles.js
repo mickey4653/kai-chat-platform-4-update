@@ -1,26 +1,35 @@
 const styles = {
+  discoveryContainerGrid: {
+    container: true,
+    item: true,
+    mobileSmall: true,
+    // rowGap: { laptop: 5, desktop: 4 },
+    // width:'auto',
+    // justifyContent: "space-between",
+  },
+
   discoveryGridProps: {
     container: true,
     item: true,
     mobileSmall: true,
-    flexDirection: 'column',
-    sx: {
-      // background: 'rgba(24, 26, 32, 0.05)',
-      transform: { laptop: 'scale(0.8)', desktop: 'scale(0.9)' },
-    },
-    width: '100%',
-    height: '100%',
-    ml: { laptop: -25, desktop: -15 },
-    mt: { laptop: -10, desktop: -5 },
-  },
-  discoveryProps: {
-    container: true,
-    item: true,
-    mobileSmall: true,
     rowGap: { laptop: 2, desktop: 4 },
-    px: { laptop: 1, desktop: 1.5, desktopMedium: 2 },
+    // px: { laptop: 1, desktop: 1.5, desktopMedium: 2 },
     flexDirection: 'column',
+    //    sx: {
+    //   background: 'rgba(24, 26, 32, 0.05)',
+    transform: {
+      laptop: 'scale(0.5)',
+      desktop: 'scale(0.7)',
+      desktopMedium: 'scale(1.0)',
+    },
+    // },
+    width: { desktopMedium: '37%', desktop: '37.5%', laptop: '50%' },
 
+    // height: { desktopMedium: '34.5%', desktop: '34.5%', laptop: '34.5%' , mobile: '36.5%' },
+
+    // height: '100%',
+    // ml: { laptop: -5, desktop: -4, desktopMedium: -28 },
+    // mt: { laptop: -10.5, desktop: -6, desktopMedium: -5  },
     sx: (theme) => ({
       borderRadius: '15px',
       borderColor: '#B791FF',
@@ -152,14 +161,15 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     spacing: 1,
-    // backgroundColor: '#B791FF',
+    backgroundColor: '#B791FF',
     width: { desktop: '320px', mobile: '308px', mobileSmall: '130px' },
     height: { laptop: '280px', desktop: '290px' },
     overflow: 'scroll',
     sx: {
       position: 'relative',
-      top: { laptop: -25, desktop: -20 },
-      right: { laptop: -30, desktop: -40 },
+      top: { laptop: -5, desktop: -20, desktopMedium: -20 },
+      // laptop: -10.5, desktop: -4, desktopMedium: -3
+      right: { laptop: -25, desktop: -25, desktopMedium: -20 },
       pb: 1,
     },
   },
@@ -174,12 +184,13 @@ const styles = {
         boxShadow: '0px 6px 12px rgba(0, 0, 0, 0.2)',
       },
       width: { laptop: '142px', desktop: '148px' },
-      height: { laptop: '360px', desktop: '350px' },
+      height: { laptop: '200px', desktop: '200px' },
     },
   },
   cardTitleProps: {
     sx: {
-      fontSize: '16px',
+      alignItems: 'center',
+      fontSize: '12px',
       fontWeight: 'bold',
     },
   },
@@ -193,6 +204,44 @@ const styles = {
   backImageProps: {
     width: '100%', // Adjust width as needed
     height: 'auto', // Adjust height as needed
+  },
+
+  chatBoxGridProps: {
+    container: true,
+    item: true,
+    // display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  chatBoxProps: {
+    width: {
+      laptop: '59%',
+      desktop: '64%',
+      desktopMedium: '70%',
+      desktopLarge: '75%',
+    },
+    sx: {
+      position: 'relative',
+      top: { laptop: 80, desktop: 70, desktopMedium: 60 },
+      left: { laptop: 340, desktop: 350, desktopMedium: 350 },
+    },
+  },
+
+  CenterChatContentGridProps: {
+    sx: {
+      overflow: 'scroll',
+      height: { laptop: '500px', desktop: '700px' },
+      width: {
+        laptop: '50%',
+        desktop: '60%',
+        desktopMedium: '65%',
+        desktopLarge: '72%',
+      },
+      // position: "relative",
+      // top: { laptop: 280, desktop: 0 },
+      left: { laptop: 200, desktop: 200 },
+    },
   },
 };
 export default styles;
