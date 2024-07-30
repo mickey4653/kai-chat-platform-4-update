@@ -8,6 +8,7 @@ const ROUTES = {
   PASSWORD_RESET: '/password-reset',
   REDIRECT: '/redirect',
   CHAT: '/chat',
+  DISCOVERY: '/discovery',
   HISTORY: '/history',
 };
 

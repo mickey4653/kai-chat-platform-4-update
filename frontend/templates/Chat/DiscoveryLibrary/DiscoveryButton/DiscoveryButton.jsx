@@ -1,21 +1,20 @@
-// src/components/DiscoveryButton.jsx
-
 import React from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, useTheme } from '@mui/material';
 
-import DiscoveryIcon from '@/assets/svg/discovery-icon.svg';
+import DiscoveryIcon from '@/assets/svg/add-block2.svg';
 
 import styles from './styles';
 
-const DiscoveryButton = ({ onClick }) => {
+const DiscoveryButton = (props) => {
+  const { onClick } = props;
   const theme = useTheme();
   return (
     <Button
       variant="outlined"
       startIcon={<DiscoveryIcon />}
-      sx={styles.actionButtonProps(theme.palette.Background.purple3).sx}
+      {...styles.actionButtonProps}
       onClick={onClick}
     >
       Discovery

@@ -6,24 +6,27 @@ const styles = {
     alignItems: 'center',
   },
 
-  actionButtonProps: (color) => ({
+  actionButtonProps: {
     variant: 'outlined',
     sx: (theme) => ({
-      borderRadius: '18px',
+      borderRadius: '5px',
       height: 'auto',
-      borderColor: color || theme.palette.Background.purple3,
-      background: color || theme.palette.Background.purple3,
-      color: theme.palette.Common.White['100p'],
+      borderColor: theme.palette.Background.purple3,
+      // border: '5px solid',
+      background: theme.palette.Common.White['100p'],
+      color: theme.palette.Background.purple3,
       textTransform: 'none',
+      // theme.palette.Common.White['100p']
+      // theme.palette.Background.purple3
       ':hover': {
-        backgroundColor: color ? `${color}BB` : '#B791FF', // Modify hover background color as needed
-        borderColor: color || theme.palette.Background.purple,
+        backgroundColor: theme.palette.Background.gradient.basicPurple, // Modify hover background color as needed
+        borderColor: theme.palette.Background.purple3,
         color: theme.palette.Common.White['100p'],
       },
       ml: { laptop: -3, desktop: -2, desktopMedium: -4.5 },
       mr: { laptop: -2, desktop: -1, desktopMedium: -3 },
     }),
-  }),
+  },
 
   iconButtonProps: {
     sx: {
