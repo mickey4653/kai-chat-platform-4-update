@@ -11,8 +11,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import useChat from '@/hooks/useChat'; // Import the hook
-
+import useChat from '@/hooks/useChat'; // Import the chat hook
 import {
   RenderBottomChatContent,
   RenderCenterChatContent,
@@ -22,6 +21,7 @@ import {
   RenderQuickAction,
   RenderSendIcon,
 } from '@/hooks/useChatRenderComponents';
+import useUser from '@/hooks/useUser'; // Import the user hook
 
 import DiscoveryIcon from '@/assets/svg/add-block2.svg';
 import imageCover1 from '@/assets/svg/imageCover1.svg';
@@ -52,6 +52,7 @@ const getRandomImage = () => {
 
 const DiscoveryLibraryUI = () => {
   const [customPrompts, setCustomPrompts] = useState([]);
+  const user = useUser();
   const {
     messagesContainerRef,
     dispatch,
@@ -142,7 +143,7 @@ const DiscoveryLibraryUI = () => {
             <UnionIcon />
           </IconButton>
           <Typography {...styles.unionIconTextProps}>
-            Welcome Back Tauseef!
+            Welcome Back, {user?.fullName || 'User'}!
           </Typography>
         </Grid>
 
